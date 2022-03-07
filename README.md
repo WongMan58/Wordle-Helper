@@ -2,7 +2,7 @@
 
 Wordle Bot is a program made in python that helps you correctly guess the answer to today's wordle.
 
-# TODO
+# To-do
   - [x] Rewrite entire program
   - [ ] Fix bug where if the word you input has two of the same letter, the bot breaks
   - [ ] Optimize code to be shorter and more accurate
