@@ -30,6 +30,7 @@ for i in range(6):
             for word in possible_words:
                 if user_letter in word and word not in removed_words:
                     removed_words.append(word)
+            user_word_data.append([user_letter, user_letter_color])
         elif user_letter_color == "yellow":
             for word in possible_words:
                 if word not in removed_words:
@@ -39,6 +40,7 @@ for i in range(6):
                         word_split = list(word)
                         if word_split[user_letter_pos] == user_letter:
                             removed_words.append(word)
+            user_word_data.append([user_letter, user_letter_color])
         elif user_letter_color == "green":
             for word in possible_words:
                 if word not in removed_words:
@@ -48,7 +50,15 @@ for i in range(6):
                         word_split = list(word)
                         if word_split[user_letter_pos] != user_letter:
                             removed_words.append(word)
+            user_word_data.append([user_letter, user_letter_color])
     
+    green_count = 0
+    for data in user_word_data:
+        if data[1] == "green":
+            green_count += 1
+    if green_count == len(user_word):
+        print("Congratulations, you have found the answer to today's Wordle! :)")
+        exit(1)
     words_that_need_printing = []
     for word in possible_words:
         if word not in removed_words:
