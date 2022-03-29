@@ -27,9 +27,14 @@ for i in range(6):
             elif user_letter_color not in available_colors:
                 print("'%s' is not one of the color options. Please choose either: 'green', 'gray', 'grey' or 'yellow'.\n" % user_letter_color)
         if user_letter_color == "gray" or user_letter_color == "grey":
-            for word in possible_words:
-                if user_letter in word and word not in removed_words:
-                    removed_words.append(word)
+            letter_is_duplicate = False
+            for letter in user_word_data:
+                if letter[0] == user_letter:
+                    letter_is_duplicate = True
+            if not letter_is_duplicate:
+                for word in possible_words:
+                    if user_letter in word and word not in removed_words:
+                        removed_words.append(word)
             user_word_data.append([user_letter, user_letter_color])
         elif user_letter_color == "yellow":
             for word in possible_words:
