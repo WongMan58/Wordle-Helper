@@ -18,14 +18,14 @@ for i in range(6):
         if user_word not in removed_words and user_word in possible_words:
             break
         elif user_word in removed_words or user_word not in possible_words:
-            print("'%s' is not a valid word to use. Please choose another word\n" % user_word)
+            print("'%s' is not a valid word or either not in the word list. Please choose another word\n" % user_word)
     for user_letter, user_letter_pos in zip(user_word, range(len(user_word))):
         while True:
             user_letter_color = input("What color was the letter '%s': " % user_letter)
             if user_letter_color in available_colors:
                 break
             elif user_letter_color not in available_colors:
-                print("'%s' is not one of the color options. Please choose either: 'green', 'gray', 'grey' or 'yellow'.\n" % user_letter_color)
+                print("'%s' is not one of the available color options. Please choose either: 'green', 'gray', 'grey' or 'yellow'.\n" % user_letter_color)
         if user_letter_color == "gray" or user_letter_color == "grey":
             letter_is_duplicate = False
             for letter in user_word_data:
@@ -64,11 +64,12 @@ for i in range(6):
     if green_count == len(user_word):
         print("Congratulations, you have found the answer to today's Wordle! :)")
         exit(1)
-    words_that_need_printing = []
+
+    words_to_print = []
     for word in possible_words:
         if word not in removed_words:
-            words_that_need_printing.append(word)
+            words_to_print.append(word)
     
     os.system('cls||clear')
     print("WORDS AVAILABLE TO USE:")
-    print(words_that_need_printing)
+    print(words_to_print)
