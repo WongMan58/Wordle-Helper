@@ -1,24 +1,62 @@
 import os
 
+# read_file function
 def read_file(file_to_read):
     with open(file_to_read, "r") as f:
         return f.read().split()
 
-possible_words = read_file("data/possible_words.txt")
+# Load up word list and create removed_words list
+orig_wordle_possible_words = read_file("data/possible_words.txt")
+quordle_possible_words = read_file("data/quordle_accepted_words.txt")
 removed_words = []
+
+# Clear the terminal
+os.system('cls||clear')
+
+# Get player options
+game_mode = input("Are you playing the original Wordle? Please type the name of the game you are about to play. Ex. Wordle, Quordle : ")
+color_mode = input("What color mode are you using? Ex. Dark mode: ")
+
+# Change game mode depending on player option
+game_mode = game_mode.lower()
+if game_mode == "wordle":
+    possible_words = orig_wordle_possible_words
+elif game_mode == "quordle":
+    possible_words = []
+    for item in quordle_possible_words:
+        possible_words.append(item.lower())
+else:
+    print("Unknown game mode. Exiting program.")
+    exit(1)
+
+# TODO Change color mode depending on player option
 available_colors = ["green", "gray", "grey", "yellow"]
 
+# Clear terminal
 os.system('cls||clear')
 
 for i in range(6):
+    # Game loop
     user_word_data = []
     while True:
         user_word = input("What word did you put in?: ")
         os.system('cls||clear')
         if user_word not in removed_words and user_word in possible_words:
             break
-        elif user_word in removed_words or user_word not in possible_words:
-            print("'%s' is not a valid word or either not in the word list. Please choose another word\n" % user_word)
+        elif user_word not in possible_words:
+            print("'%s' is not a valid word. Please choose another word" % user_word)
+        elif user_word in possible_words and user_word in removed_words:
+            while True:
+                y_or_n = input("The word you choose '%s' does not exactly fulfill the requirements. Are you sure you want to choose this word? (y/n)" % user_word)
+                y_or_n = y_or_n.lower()
+                if y_or_n == "y" or y_or_n == "n":
+                    break
+                else:
+                    print("Unknown option choosen. Please try again.")
+            if y_or_n == "y":
+                break
+            elif y_or_n == "n":
+                pass
     for user_letter, user_letter_pos in zip(user_word, range(len(user_word))):
         while True:
             user_letter_color = input("What color was the letter '%s': " % user_letter)
