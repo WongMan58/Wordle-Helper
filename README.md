@@ -1,11 +1,10 @@
-# Wordle Bot
+# Wordle Helper
 
-Wordle Bot is a program made in python that helps you correctly guess the answer to today's wordle.
+Wordle Helper is a special program that can help the user more efficiently beat the game Wordle. Other than just helping with Wordle, it can also help you play other games, if implemented, that are similar to Wordle (Quordle, Canuckle...)
 
 # To-Do
-  - [x] Rewrite entire program
-  - [ ] Fix bug where if the word you input has two of the same letter, the bot breaks
-  - [ ] Optimize code to be shorter and more accurate
-  - [ ] Use percentages to show which words have a bigger change to be correct
+  - [ ] Refractor program
+  - [ ] Optimize code after refractor
+  - [ ] Use word percentages to suggest more accurate results
 
 _NOTE: This is a WIP, things may change in the near future_
