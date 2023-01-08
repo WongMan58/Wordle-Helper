@@ -8,8 +8,8 @@ def read_file(file_to_read):
 accepted_game_modes = ["wordle", "quordle"]
 
 # Load data into lists
-wordle_words = read_file("data/wordle_words.txt")
-quordle_words = read_file("data/quordle_words.txt")
+wordle_words = read_file("../data/wordle_words.txt")
+quordle_words = read_file("../data/quordle_words.txt")
 
 # Color themes
 wordle_accepted_color_themes = ["light", "dark"]
