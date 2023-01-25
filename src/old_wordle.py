@@ -6,7 +6,7 @@ def read_file(file_to_read):
         return f.read().split()
 
 # Load up word list and create removed_words list
-possible_words = read_file("data/wordle_words.txt")
+possible_words = read_file("../data/wordle_words_2.txt")
 removed_words = []
 available_colors = ["green", "gray", "grey", "yellow"]
 

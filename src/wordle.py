@@ -65,8 +65,80 @@ os.system('cls||clear')
 
 accepted_colors = locals()["%s_%s_color_set" % (game_mode_lowered, color_theme_lowered)]
 accepted_words = locals()["%s_words" % game_mode_lowered]
-removed_words = []
+accepted_words_duplicate = accepted_words
 
 # Lowercase all the items in the accepted words list
 for item, item_index in zip(accepted_words, range(len(accepted_words))):
     accepted_words[item_index] = item.lower()
+
+# Clear the terminal
+os.system('cls||clear')
+
+# Loop for player rounds
+for i in range(6):
+    user_word_data = []
+    while True:
+        user_word = input("What word did you enter?: ")
+        os.system('cls||clear')
+        if user_word in accepted_words_duplicate:
+            break
+        elif user_word not in accepted_words_duplicate:
+            print("'%s' does not fulfill all the requirements. Please choose another word." % user_word)
+            break
+    for user_letter_index, user_letter in enumerate(user_word):
+        while True:
+            user_letter_color = input ("What color was the letter '%s'?: " % user_letter)
+            try:
+                user_letter_color = user_letter_color.lower()
+            except:
+                print("The inputted letter color for '%s' must be in letters. Please choose one of these options: %s" % (user_letter, accepted_colors))
+                continue
+            if user_letter_color in accepted_colors:
+                break
+            elif user_letter_color not in accepted_colors:
+                print("The inputted letter color is not one of the valid color options. Please choose one of these options: %s" % (accepted_colors))
+        # TODO: Support for other game modes
+        if game_mode == "wordle":
+            if user_letter_color == "gray" or user_letter_color == "gray":
+                letter_is_duplicate = False
+                for letter in user_word_data:
+                    if letter[0] == user_letter:
+                        letter_is_duplicate = True
+                if not letter_is_duplicate:
+                    for word in accepted_words:
+                        if user_letter in word:
+                            accepted_words_duplicate.remove(word)
+                user_word_data.append([user_letter, user_letter_color])
+            elif user_letter_color == "yellow":
+                for word in accepted_words:
+                    if user_letter not in word:
+                        accepted_words_duplicate.remove(word)
+                        continue
+                    word_split = list(word)
+                    if word_split[user_letter_index] == user_letter:
+                        accepted_words_duplicate.remove(word)
+                user_word_data.append([user_letter, user_letter_color])
+            elif user_letter_color == "green":
+                for word in accepted_words:
+                    if user_letter not in word:
+                        accepted_words_duplicate.remove(word)
+                        continue
+                    word_split = list(word)
+                    if word_split[user_letter_index] != user_letter:
+                        accepted_words_duplicate.remove(word)
+                user_word_data.append([user_letter, user_letter_color])
+        
+    # TODO: For other color modes, the correct answer might not be green
+    green_count = 0
+    for data in user_word_data:
+        if data[1] == "green":
+            green_count += 1
+
+    #accepted_words_duplicate.remove(user_word)
+
+    accepted_words = accepted_words_duplicate
+        
+    os.system('cls||clear')
+    print("WORDS AVAILABLE TO ENTER: ")
+    print(accepted_words)
+        
